@@ -1,0 +1,50 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 80px;
+}
+
+.logo {
+    width: 129px;
+    height: 41px;
+    cursor: pointer;
+}
+
+.searchBox {
+    display: none;
+}
+
+.input {
+    width: 300px;
+    border: none;
+    outline: none;
+    margin-left: 6px;
+    margin-bottom: 2px;
+    font-size: 15px;
+    color: #2c2c2c;
+}
+
+.input::placeholder {
+    color: #414141;
+    font-weight: 400;
+}
+
+.allCampaigns {
+    display: none;
+}
+
+@media (min-width: 880px) {
+    .searchBox {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (min-width: 450px) {
+    .allCampaigns {
+        display: inline-flex;
+    }
+}

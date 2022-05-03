@@ -1,0 +1,36 @@
+.button {
+    border: none;
+    outline: none;
+    border-radius: 13px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.primary {
+    background: #000;
+    color: #fff;
+}
+
+.secondary {}
+
+.tertiary {
+    background: none;
+    color: #595959;
+}
+
+.sizeS {}
+
+.sizeM {
+    height: 40px;
+    width: 147px;
+}
+
+.sizeL {}
+
+@media (max-width: 450px) {
+    .sizeM {
+        height: 34px;
+        width: 130px;
+        font-size: 13px;
+    }
+}

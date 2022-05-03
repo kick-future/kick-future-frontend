@@ -54,6 +54,11 @@
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
     "no-shadow": "off",
+    "jsx-a11y/label-has-associated-control": ["error", {
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }],
     "@typescript-eslint/no-shadow": ["error"]
   }
 }
