@@ -1,0 +1,62 @@
+.homeHeadline5 {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.homeText {
+    font-size: 15px;
+    line-height: 1.71;
+    color: #000000;
+    margin-top: 15px;
+}
+
+.homeTextBigMargin {
+    margin-top: 50px;
+}
+
+.dashboardBlock {
+    width: 500px;
+    border-right: 2px solid #676767;
+    padding-right: 50px;
+    height: 100%;
+}
+
+.homeTop {
+    display: flex;
+
+    height: calc(50vh - 55px);
+    border-bottom: 2px solid #676767;
+}
+
+.about {
+    height: 100%;
+    padding-top: 25px;
+
+    width: 310px;
+    border-right: 2px solid #676767;
+}
+
+.allInvestments {
+    height: 100%;
+    padding-top: 25px;
+    padding-left: 40px;
+}
+
+.lastInvestments {
+    height: 100%;
+    padding-top: 40px;
+    padding-left: 40px;
+
+}
+
+.homeBottom {
+    display: flex;
+    height: calc(50vh - 55px);
+}
+
+.dashboardBlock {
+    height: 100%;
+    padding-top: 40px;
+}

@@ -1,0 +1,17 @@
+.item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 20px 0;
+}
+
+.iconArrow {
+    margin-left: auto;
+    font-size: 30px;
+    margin-right: 40px;
+    transition: ease-in-out 0.2s;
+}
+
+.item:hover .iconArrow {
+    margin-right: 30px;
+}

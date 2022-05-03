@@ -3,7 +3,19 @@
     max-width: 100%;
     padding: 0 12px;
 
-    border: 1px solid red;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+.content {
+    width: calc(100% - 100px);
+    padding: 0 50px;
+    border-right: 2px solid #676767;
+    border-left: 2px solid #676767;
+    height: calc(100vh - 110px);
 }
 
 @media (min-width: 768px) {

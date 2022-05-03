@@ -1,0 +1,40 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: calc(100vh - 80px);
+    width: 292px;
+    position: relative;
+}
+
+.menuBottomBlock {
+    height: calc(50vh - 55px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 210px;
+}
+
+.menuHeadline {
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    margin-top: 10px;
+}
+
+.menuButton {
+    margin-top: 20px;
+}
+
+.copyright {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #7C7C7C;
+
+    margin-top: 15px;
+}
