@@ -33,8 +33,9 @@
 .about {
     height: 100%;
     padding-top: 25px;
+    padding-right: 30px;
 
-    width: 310px;
+    width: 40%;
     border-right: 2px solid #676767;
 }
 
@@ -42,13 +43,22 @@
     height: 100%;
     padding-top: 25px;
     padding-left: 40px;
+    width: 60%;
+}
+
+.allMoney {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    color: #000000;
+    margin-top: 15px;
 }
 
 .lastInvestments {
     height: 100%;
     padding-top: 40px;
     padding-left: 40px;
-
+    width: 42%;
 }
 
 .homeBottom {
@@ -59,4 +69,5 @@
 .dashboardBlock {
     height: 100%;
     padding-top: 40px;
+    width: 58%;
 }

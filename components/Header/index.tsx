@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { FC } from "react";
 import { RiSearchLine } from "react-icons/ri";
 
@@ -10,7 +11,13 @@ const Header: FC = () => {
     return (
         <header className={styles.header}>
             <div className={styles.logo}>
-                <img src={Logo.src} className={styles.logo} alt="logo" />
+                <Image
+                    src={Logo.src}
+                    width="129px"
+                    height="41px"
+                    className={styles.logo}
+                    alt="logo"
+                />
             </div>
 
             <div className={styles.searchBox}>
@@ -28,7 +35,9 @@ const Header: FC = () => {
             </div>
 
             <div className={styles.buttons}>
-                <Button className={styles.allCampaigns} type="tertiary">All campaigns</Button>
+                <Button className={styles.allCampaigns} type="tertiary">
+                    All campaigns
+                </Button>
                 <Button style={{ marginLeft: "20px" }} size="M" type="primary">
                     Create campaign
                 </Button>

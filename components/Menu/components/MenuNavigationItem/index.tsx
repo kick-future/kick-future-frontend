@@ -19,7 +19,7 @@ const MenuNavigationItem: FC<IMenuNavigationItem> = ({ isActive, type }) => {
 
 
     return (
-        <li className={styles.item}>
+        <li key={type.toString()} className={styles.item}>
             <Icon style={{ fontSize: "20px", marginRight: "15px" }} />
             <span>{type}</span>
             {isActive && <BsArrowRight className={styles.iconArrow} />}

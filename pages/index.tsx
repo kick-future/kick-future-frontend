@@ -1,13 +1,15 @@
 import cn from "classnames";
 import type { NextPage } from "next";
-import React from "react";
+import React, { FC } from "react";
 
 import styles from "styles/Home.module.css";
 
+import Chart from "../components/Chart";
 import DashboardCards from "../components/DashboardCards";
+import InvestmentItems from "../components/InvestmentItems";
 import Layout from "../components/Layout";
 
-const Home: NextPage = () => {
+const Home: FC<NextPage> = () => {
     return (
         <Layout>
             <div>
@@ -30,6 +32,8 @@ const Home: NextPage = () => {
                         <h5 className={styles.homeHeadline5}>
                             All investments
                         </h5>
+                        <p className={styles.allMoney}>2,547345 ETHER</p>
+                        <Chart />
                     </div>
                 </div>
                 <div className={styles.homeBottom}>
@@ -45,6 +49,7 @@ const Home: NextPage = () => {
                         <h5 className={styles.homeHeadline5}>
                             Last investments
                         </h5>
+                        <InvestmentItems />
                     </div>
                 </div>
             </div>

@@ -49,6 +49,7 @@
     "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "react/prop-types": 0,
+    "@typescript-eslint/ban-ts-comment": 0,
     "react/jsx-filename-extension": [
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }

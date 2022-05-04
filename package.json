@@ -10,9 +10,13 @@
     "fix:prettier": "prettier --write pages/*"
   },
   "dependencies": {
+    "@react-hook/window-size": "^3.0.7",
+    "@types/react-resizable": "^1.7.4",
+    "chart.js": "^3.1.0",
     "classnames": "^2.3.1",
     "next": "12.1.6",
     "react": "18.1.0",
+    "react-chartjs-2": "4.1.0",
     "react-dom": "18.1.0",
     "react-icons": "^4.3.1"
   },

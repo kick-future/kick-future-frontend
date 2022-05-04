@@ -1,0 +1,67 @@
+.switcherLang {
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.switcherLangLabel {
+    background: none;
+    border: none;
+    outline: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.labelFlagText {
+    display: flex;
+    align-items: center;
+}
+
+.flag {
+    border-radius: 100px;
+}
+
+.text {
+    margin-left: 10px;
+}
+
+.modal {
+    position: absolute;
+    list-style: none;
+    background: #fff;
+    margin-top: 10px;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 13px;
+    z-index: 10;
+
+    -webkit-box-shadow: 0px 3px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 3px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 3px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.modalItem {
+    background: none;
+    border: none;
+    outline: none;
+    border-radius: 13px;
+    transition: ease-in-out 0.1s;
+
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 5px 5px;
+    padding: 10px 15px;
+}
+
+.modalItem:hover {
+    background: #f1f1f1;
+}

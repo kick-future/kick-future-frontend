@@ -20,9 +20,9 @@ const Card: FC<ICard> = ({ color, bg, description, amount, Icon }) => {
 const DashboardCards: FC = () => {
     return (
         <ul className={styles.dashboardCards}>
-            <Card color="#fff" bg="#000" amount="42" description="Created campaigns" Icon={MdDone} />
-            <Card color="#000" bg="#D9DAD3" amount="741" description="Participating donaters" Icon={MdPeopleOutline} />
-            <Card color="#000" bg="#57FFAD" amount="13" description="Active campaigns" Icon={MdMoving} />
+            <Card key={123} color="#fff" bg="#000" amount="42" description="Created campaigns" Icon={MdDone} />
+            <Card key={321} color="#000" bg="#D9DAD3" amount="741" description="Participating donaters" Icon={MdPeopleOutline} />
+            <Card key={231} color="#000" bg="#57FFAD" amount="13" description="Active campaigns" Icon={MdMoving} />
         </ul>
     );
 };

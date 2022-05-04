@@ -1,17 +1,19 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import MenuNavigationItem from "../MenuNavigationItem";
+import SwitcherLang from "components/SwitcherLang"
 import styles from "./MenuNavigation.module.css";
 
 const MenuNavigation: FC = () => {
+
     return (
         <nav className={styles.navigation}>
             <ul className={styles.list}>
-                <MenuNavigationItem type="Home" isActive />
-                <MenuNavigationItem type="Campaigns" />
-                <MenuNavigationItem type="Transactions" />
+                <MenuNavigationItem key={333} type="Home" isActive />
+                <MenuNavigationItem key={444} type="Campaigns" />
+                <MenuNavigationItem key={555} type="Transactions" />
             </ul>
-            <div className={styles.switcherLang}>Switcher lang</div>
+            <SwitcherLang />
         </nav>
     );
 };
