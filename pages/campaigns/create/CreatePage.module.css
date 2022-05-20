@@ -1,0 +1,7 @@
+.topBlock {
+    display: flex;
+    flex-direction: column;
+
+    height: calc(50vh - 55px);
+    border-bottom: 2px solid #676767;
+}
