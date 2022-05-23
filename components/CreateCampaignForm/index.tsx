@@ -7,7 +7,7 @@ const CreateCampaignForm = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [mainPhoto, setMainPhoto] = useState("");
-    const [photos, setPhotos] = useState([""]);
+    const [photos, setPhotos] = useState<string[]>([]);
 
     return (
         <>
@@ -40,6 +40,8 @@ const CreateCampaignForm = () => {
                     <CreateCampaignPhotos
                         mainPhoto={mainPhoto}
                         setMainPhoto={setMainPhoto}
+                        photos={photos}
+                        setPhotos={setPhotos}
                     />
                 </div>
             </form>

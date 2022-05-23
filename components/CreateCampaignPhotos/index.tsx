@@ -6,15 +6,15 @@ import styles from "./CreateCampaignPhotos.module.css";
 interface IPhotoItem {
     isMain?: boolean;
     photo?: string;
-    mainPhoto: string;
-    setMainPhoto: (f: string) => void;
+    setPhoto: (f: string) => void;
+    index: number;
 }
 
 const PhotoItem: FC<IPhotoItem> = ({
     isMain = false,
     photo = "",
-    mainPhoto,
-    setMainPhoto,
+    setPhoto,
+  index
 }) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const addPhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,8 @@ const PhotoItem: FC<IPhotoItem> = ({
             const reader = new FileReader();
             reader.onload = (ev) => {
                 if (ev.target && ev.target.result) {
-                    setMainPhoto(ev.target.result.toString() || "");
+                    console.log('index', index);
+                    setPhoto(ev.target.result.toString() || "");
                 }
             };
             reader.readAsDataURL(newFile);
@@ -34,11 +35,11 @@ const PhotoItem: FC<IPhotoItem> = ({
 
     return (
         <label className={styles.photoItem} htmlFor="photo">
-            {!mainPhoto && (isMain ? "Add main photo" : "Add photo")}
-            {mainPhoto && (
+            {!photo && (isMain ? "Add main photo" : "Add photo")}
+            {photo && (
                 <img
                     className={cn(styles.photoItem, styles.photo)}
-                    src={mainPhoto}
+                    src={photo}
                     alt=""
                 />
             )}
@@ -56,30 +57,42 @@ const PhotoItem: FC<IPhotoItem> = ({
 interface ICreateCampaignPhotos {
     mainPhoto: string;
     setMainPhoto: (s: string) => void;
+    photos: string[];
+    setPhotos: (s: (prev: string[]) => string[]) => void;
 }
 
 const CreateCampaignPhotos: FC<ICreateCampaignPhotos> = ({
     mainPhoto,
     setMainPhoto,
+    photos,
+    setPhotos,
 }) => {
-    // const [photos, setPhotos] = useState([]);
-    const photos = Array(4).fill(null);
+    const emptyArray = Array(4).fill(null);
 
-    console.log("photo:", mainPhoto);
+    const addPhoto = (s: string, index: number) => {
+        console.log('photos:', photos);
+        setPhotos((prev: string[]) => {
+            return [
+              ...prev.slice(0, index),
+              s,
+              ...prev.slice(index),
+            ];
+        });
+    };
+    //
+    // console.log('photos:', photos);
+    // console.log('mainPhoto:', mainPhoto);
     return (
         <div className={styles.photos}>
-            {photos.map((photo, index) => (
+            {emptyArray.map((photo, index) => (
                 <PhotoItem
-                    mainPhoto={mainPhoto}
-                    setMainPhoto={setMainPhoto}
-                    isMain={!index}
-                    photo={photo}
+                  index={index}
+                    setPhoto={(p: string) => addPhoto(p, index)}
+                    isMain={index === 0}
+                    photo={index === 0 ? mainPhoto : photos[index - 1]}
+                    key={`${photo}_${index}`}
                 />
             ))}
-            {/* <PhotoItem isMain /> */}
-            {/* <PhotoItem /> */}
-            {/* <PhotoItem /> */}
-            {/* <PhotoItem /> */}
         </div>
     );
 };
