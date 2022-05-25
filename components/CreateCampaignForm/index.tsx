@@ -6,8 +6,7 @@ import styles from "./CreateCampaignForm.module.css";
 const CreateCampaignForm = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [mainPhoto, setMainPhoto] = useState("");
-    const [photos, setPhotos] = useState<string[]>([]);
+    const [photos, setPhotos] = useState<string[]>(['','','','']);
 
     return (
         <>
@@ -38,8 +37,6 @@ const CreateCampaignForm = () => {
                 <div className={styles.photos}>
                     <span>Campaign photos (please upload square photos)</span>
                     <CreateCampaignPhotos
-                        mainPhoto={mainPhoto}
-                        setMainPhoto={setMainPhoto}
                         photos={photos}
                         setPhotos={setPhotos}
                     />

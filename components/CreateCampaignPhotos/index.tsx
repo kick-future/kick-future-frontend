@@ -1,98 +1,117 @@
 import cn from "classnames";
-import React, { FC, useRef } from "react";
+import React, { FC, useRef, useState } from "react";
 
 import styles from "./CreateCampaignPhotos.module.css";
 
-interface IPhotoItem {
-    isMain?: boolean;
-    photo?: string;
-    setPhoto: (f: string) => void;
-    index: number;
-}
-
-const PhotoItem: FC<IPhotoItem> = ({
-    isMain = false,
-    photo = "",
-    setPhoto,
-  index
-}) => {
-    const inputRef = useRef<HTMLInputElement>(null);
-    const addPhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        if (e.currentTarget.files) {
-            const newFile = e.currentTarget.files[0];
-
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                if (ev.target && ev.target.result) {
-                    console.log('index', index);
-                    setPhoto(ev.target.result.toString() || "");
-                }
-            };
-            reader.readAsDataURL(newFile);
-        }
-    };
-
-    return (
-        <label className={styles.photoItem} htmlFor="photo">
-            {!photo && (isMain ? "Add main photo" : "Add photo")}
-            {photo && (
-                <img
-                    className={cn(styles.photoItem, styles.photo)}
-                    src={photo}
-                    alt=""
-                />
-            )}
-            <input
-                ref={inputRef}
-                onChange={addPhoto}
-                className={styles.inputPhoto}
-                type="file"
-                id="photo"
-            />
-        </label>
-    );
-};
+// interface IPhotoItem {
+//     photo?: string;
+//     setPhotos: (s: (prev: string[]) => string[]) => void;
+//     index: number;
+// }
+//
+// const PhotoItem: FC<IPhotoItem> = ({ photo = "", setPhotos, index }) => {
+//
+//     return (
+//     );
+// };
 
 interface ICreateCampaignPhotos {
-    mainPhoto: string;
-    setMainPhoto: (s: string) => void;
     photos: string[];
     setPhotos: (s: (prev: string[]) => string[]) => void;
 }
 
 const CreateCampaignPhotos: FC<ICreateCampaignPhotos> = ({
-    mainPhoto,
-    setMainPhoto,
     photos,
     setPhotos,
 }) => {
-    const emptyArray = Array(4).fill(null);
+    const emptyArray = Array(4).fill(0);
+    const [drag, setDrag] = useState(false);
 
-    const addPhoto = (s: string, index: number) => {
-        console.log('photos:', photos);
-        setPhotos((prev: string[]) => {
-            return [
-              ...prev.slice(0, index),
-              s,
-              ...prev.slice(index),
-            ];
-        });
+    const uploadPhoto = (file: Blob, index: number) => {
+        if (file.size > 2000000) {
+            return;
+        }
+
+        console.log("file", file);
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            if (ev.target && ev.target.result) {
+                setPhotos((prev: string[]) => {
+                    return [
+                        ...prev.slice(0, index),
+                        ev?.target?.result?.toString() || "",
+                        ...prev.slice(index + 1),
+                    ];
+                });
+            }
+        };
+        reader.readAsDataURL(file);
     };
-    //
-    // console.log('photos:', photos);
-    // console.log('mainPhoto:', mainPhoto);
+
+    const addPhoto = (e, index: number) => {
+        console.log("index:", index);
+        e.preventDefault();
+        if (e.currentTarget.files) {
+            const file = e.currentTarget.files[0];
+            uploadPhoto(file, index);
+        }
+    };
+
+    const onDropHandler = (e, index: number) => {
+        e.preventDefault();
+        const files = [...e.dataTransfer.files];
+        const file = files[0];
+        uploadPhoto(file, index);
+        setDrag(false);
+    };
+    const dragStartHandler = (e) => {
+        e.preventDefault();
+        setDrag(true);
+    };
+    const dragLeaveHandler = (e) => {
+        e.preventDefault();
+        setDrag(false);
+    };
+
+    console.log("photos:", photos);
+
     return (
         <div className={styles.photos}>
-            {emptyArray.map((photo, index) => (
-                <PhotoItem
-                  index={index}
-                    setPhoto={(p: string) => addPhoto(p, index)}
-                    isMain={index === 0}
-                    photo={index === 0 ? mainPhoto : photos[index - 1]}
-                    key={`${photo}_${index}`}
-                />
-            ))}
+            {photos.map((photo, index) => {
+                if (index > 3) {
+                    return null;
+                }
+
+                return (
+                    <label
+                        key={index}
+                        className={cn(
+                            styles.photoItem,
+                            drag && styles.photoDrag
+                        )}
+                        htmlFor="photo"
+                        onDragOver={dragStartHandler}
+                        onDragStart={dragStartHandler}
+                        onDragLeave={dragLeaveHandler}
+                        onDrop={(e) => onDropHandler(e, index)}
+                    >
+                        {!photo && (drag ? "Drop file" : "Add file")}
+                        {photo && (
+                            <img
+                                className={cn(styles.photoItem, styles.photo)}
+                                src={photo}
+                                alt=""
+                            />
+                        )}
+                        <input
+                            onChange={(e) => addPhoto(e, index)}
+                            type="file"
+                            id="photo"
+                        />
+                    </label>
+                );
+            })}
         </div>
     );
 };

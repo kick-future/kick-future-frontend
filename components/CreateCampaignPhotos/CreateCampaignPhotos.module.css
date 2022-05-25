@@ -20,8 +20,12 @@
     border: 1px dashed #676767;
 }
 
-.inputPhoto {
-    display: none;
+.photoDrag {
+    border: 2px dashed #363636;
+}
+
+.contInput {
+    visibility: hidden;
 }
 
 .photo {
