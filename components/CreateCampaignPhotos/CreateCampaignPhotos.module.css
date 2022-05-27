@@ -20,14 +20,49 @@
     border: 1px dashed #676767;
 }
 
-.photoDrag {
-    border: 2px dashed #363636;
-}
-
 .contInput {
     visibility: hidden;
 }
 
+.input {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.photoBlock {
+    position: relative;
+}
+
 .photo {
     border: none;
+}
+
+.closeTag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: #c71010;
+    width: 18px;
+    height: 18px;
+    border-radius: 100px;
+
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+}
+
+.closeTag:hover {
+    background: #b61212;
+}
+
+.closeIcon {
+    color: #fff;
 }

@@ -50,6 +50,7 @@
     "@typescript-eslint/no-use-before-define": "off",
     "react/require-default-props": "off",
     "react/no-array-index-key": "off",
+    "react/button-has-type": "off",
     "react/prop-types": 0,
     "@typescript-eslint/ban-ts-comment": 0,
     "react/jsx-filename-extension": [

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
+import Button from "../Button";
 import CreateCampaignPhotos from "../CreateCampaignPhotos";
 import styles from "./CreateCampaignForm.module.css";
 
 const CreateCampaignForm = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [photos, setPhotos] = useState<string[]>(['','','','']);
+    const [photos, setPhotos] = useState<string[]>(["", "", "", ""]);
 
     return (
         <>
@@ -41,6 +42,9 @@ const CreateCampaignForm = () => {
                         setPhotos={setPhotos}
                     />
                 </div>
+                <Button typeButtonAction="submit" className={styles.createButton} size="M">
+                    Create
+                </Button>
             </form>
         </>
     );

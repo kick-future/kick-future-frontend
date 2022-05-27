@@ -2,7 +2,7 @@ import cn from "classnames";
 import React, { FC } from "react";
 
 import styles from "./Button.module.css";
-import { IButton } from "./Button.typings";
+import { IButton, TypeButtonAction } from "./Button.typings";
 
 const Button: FC<IButton> = ({
     children,
@@ -10,6 +10,7 @@ const Button: FC<IButton> = ({
     type = "primary",
     style,
     className,
+    typeButtonAction = "button",
 }) => {
     return (
         <button
@@ -22,7 +23,7 @@ const Button: FC<IButton> = ({
                 [styles.sizeM]: size === "M",
                 [styles.sizeL]: size === "L",
             })}
-            type="button"
+            type={typeButtonAction}
         >
             {children}
         </button>

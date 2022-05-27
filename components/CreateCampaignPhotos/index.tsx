@@ -1,19 +1,100 @@
 import cn from "classnames";
-import React, { FC, useRef, useState } from "react";
+import React, {
+    ChangeEvent,
+    FC,
+} from "react";
+import { IoCloseSharp } from "react-icons/io5";
 
 import styles from "./CreateCampaignPhotos.module.css";
 
-// interface IPhotoItem {
-//     photo?: string;
-//     setPhotos: (s: (prev: string[]) => string[]) => void;
-//     index: number;
-// }
-//
-// const PhotoItem: FC<IPhotoItem> = ({ photo = "", setPhotos, index }) => {
-//
-//     return (
-//     );
-// };
+interface IPhotoItem {
+    photo?: string;
+    setPhotos: (s: (prev: string[]) => string[]) => void;
+    index: number;
+}
+
+const PhotoItem: FC<IPhotoItem> = ({ photo = "", setPhotos, index }) => {
+    const removePhoto = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, i: number) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setPhotos((prev: string[]) => {
+            return [...prev.slice(0, i), "", ...prev.slice(i + 1)];
+        });
+    };
+
+    const uploadPhoto = (file: Blob, i: number) => {
+        if (file.size > 2000000) {
+            // TODO: will need to add error handler
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            if (ev.target && ev.target.result) {
+                setPhotos((prev: string[]) => {
+                    return [
+                        ...prev.slice(0, i),
+                        ev?.target?.result?.toString() || "",
+                        ...prev.slice(i + 1),
+                    ];
+                });
+            }
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const addPhoto = (e: ChangeEvent<HTMLInputElement>, i: number) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.currentTarget.files) {
+            const file = e.currentTarget.files[0];
+            uploadPhoto(file, i);
+        }
+    };
+
+    const onDropHandler = (e: React.DragEvent<HTMLLabelElement>, i: number) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // @ts-ignore
+        const files = [...e.dataTransfer.files];
+        const file = files[0];
+        uploadPhoto(file, i);
+    };
+
+    return (
+        <div>
+            <label
+                className={styles.photoItem}
+                htmlFor={`photo_${index}`}
+                onDrop={(e) => onDropHandler(e, index)}
+            >
+                {!photo && "Add file"}
+                {photo && (
+                    <div className={styles.photoBlock}>
+                        <img
+                            className={cn(styles.photoItem, styles.photo)}
+                            src={photo}
+                            alt=""
+                        />
+                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+                        <div
+                            onClick={(e) => removePhoto(e, index)}
+                            className={styles.closeTag}
+                        >
+                            <IoCloseSharp className={styles.closeIcon} />
+                        </div>
+                    </div>
+                )}
+            </label>
+            <input
+                className={styles.input}
+                onChange={(e) => addPhoto(e, index)}
+                type="file"
+                id={`photo_${index}`}
+            />
+        </div>
+    );
+};
 
 interface ICreateCampaignPhotos {
     photos: string[];
@@ -24,58 +105,6 @@ const CreateCampaignPhotos: FC<ICreateCampaignPhotos> = ({
     photos,
     setPhotos,
 }) => {
-    const emptyArray = Array(4).fill(0);
-    const [drag, setDrag] = useState(false);
-
-    const uploadPhoto = (file: Blob, index: number) => {
-        if (file.size > 2000000) {
-            return;
-        }
-
-        console.log("file", file);
-
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-            if (ev.target && ev.target.result) {
-                setPhotos((prev: string[]) => {
-                    return [
-                        ...prev.slice(0, index),
-                        ev?.target?.result?.toString() || "",
-                        ...prev.slice(index + 1),
-                    ];
-                });
-            }
-        };
-        reader.readAsDataURL(file);
-    };
-
-    const addPhoto = (e, index: number) => {
-        console.log("index:", index);
-        e.preventDefault();
-        if (e.currentTarget.files) {
-            const file = e.currentTarget.files[0];
-            uploadPhoto(file, index);
-        }
-    };
-
-    const onDropHandler = (e, index: number) => {
-        e.preventDefault();
-        const files = [...e.dataTransfer.files];
-        const file = files[0];
-        uploadPhoto(file, index);
-        setDrag(false);
-    };
-    const dragStartHandler = (e) => {
-        e.preventDefault();
-        setDrag(true);
-    };
-    const dragLeaveHandler = (e) => {
-        e.preventDefault();
-        setDrag(false);
-    };
-
-    console.log("photos:", photos);
-
     return (
         <div className={styles.photos}>
             {photos.map((photo, index) => {
@@ -84,32 +113,12 @@ const CreateCampaignPhotos: FC<ICreateCampaignPhotos> = ({
                 }
 
                 return (
-                    <label
+                    <PhotoItem
                         key={index}
-                        className={cn(
-                            styles.photoItem,
-                            drag && styles.photoDrag
-                        )}
-                        htmlFor="photo"
-                        onDragOver={dragStartHandler}
-                        onDragStart={dragStartHandler}
-                        onDragLeave={dragLeaveHandler}
-                        onDrop={(e) => onDropHandler(e, index)}
-                    >
-                        {!photo && (drag ? "Drop file" : "Add file")}
-                        {photo && (
-                            <img
-                                className={cn(styles.photoItem, styles.photo)}
-                                src={photo}
-                                alt=""
-                            />
-                        )}
-                        <input
-                            onChange={(e) => addPhoto(e, index)}
-                            type="file"
-                            id="photo"
-                        />
-                    </label>
+                        setPhotos={setPhotos}
+                        photo={photo}
+                        index={index}
+                    />
                 );
             })}
         </div>

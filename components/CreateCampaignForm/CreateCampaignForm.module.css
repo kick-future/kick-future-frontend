@@ -33,6 +33,10 @@
     padding: 0 15px;
 }
 
+.input:focus {
+    border-color: #252525;
+}
+
 .textarea {
     width: 474px;
     height: 70px;
@@ -44,8 +48,17 @@
     resize: none;
 }
 
+.textarea:focus {
+    border-color: #252525;
+}
+
 .photos {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.createButton {
+    margin-top: 20px;
+    align-self: flex-end;
 }
