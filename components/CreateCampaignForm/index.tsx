@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 
 import Button from "../Button";
 import CreateCampaignPhotos from "../CreateCampaignPhotos";
 import styles from "./CreateCampaignForm.module.css";
 
-const CreateCampaignForm = () => {
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [photos, setPhotos] = useState<string[]>(["", "", "", ""]);
+interface ICreateCampaignForm {
+    name: string;
+    setName: (s: string) => void;
+    description: string;
+    setDescription: (s: string) => void;
+    photos: string[];
+    setPhotos: (s: (prev: string[]) => string[]) => void;
+}
 
+const CreateCampaignForm: FC<ICreateCampaignForm> = ({
+    name,
+    setName,
+    description,
+    setDescription,
+    photos,
+    setPhotos,
+}) => {
     return (
         <>
             <h3 className={styles.title}>Create campaign</h3>
@@ -42,7 +54,11 @@ const CreateCampaignForm = () => {
                         setPhotos={setPhotos}
                     />
                 </div>
-                <Button typeButtonAction="submit" className={styles.createButton} size="M">
+                <Button
+                    typeButtonAction="submit"
+                    className={styles.createButton}
+                    size="M"
+                >
                     Create
                 </Button>
             </form>

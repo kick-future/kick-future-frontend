@@ -1,0 +1,41 @@
+.gallery {
+    width: 280px;
+}
+
+.galleryMainPhoto {
+    width: 280px;
+    height: 280px;
+    border-radius: 13px;
+}
+
+.emptyActivePhotos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border: 1px solid #e3e3e3;
+    width: 280px;
+    height: 280px;
+    border-radius: 13px;
+    color: #8a8a8a;
+}
+
+.preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 14px;
+    margin-top: 10px;
+}
+
+.galleryPreviewPhoto {
+    width: 60px;
+    height: 60px;
+    border-radius: 13px;
+    cursor: pointer;
+    border: 2px solid rgba(159, 159, 159, 0.51);
+}
+
+.galleryPreviewActivePhoto {
+    border: 2px solid rgba(86, 252, 171, 0.51);
+}
